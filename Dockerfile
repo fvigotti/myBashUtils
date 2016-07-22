@@ -4,4 +4,3 @@ ADD src /myBashUtils
 
 WORKDIR /myBashUtils
 
-ENTRYPOINT ["/bin/bash"]
