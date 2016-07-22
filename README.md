@@ -1,3 +1,9 @@
+# available as 
+  - docker pull fvigotti/mybashutils
+    :latest
+    :dev
+    :v1.0
+
 
 # always execute tests in controlled environment ,
 use `execTest.sh $TEST` which execute something like 
