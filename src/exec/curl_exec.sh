@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -xe
 print_help() {
   echo ' execute bash script located at given url '
   echo $0' $url $args'
@@ -7,4 +7,4 @@ print_help() {
 URL=$1
 shift;
 
-curl -s $1 | bash -s $@ --
+curl -s $URL | bash -s $@ --
