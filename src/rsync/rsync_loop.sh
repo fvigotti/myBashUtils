@@ -103,22 +103,31 @@ do_backup(){
   rsync $ARGS  $SRC $DST
 }
 
+validate_destination_must_exist(){
+  [[ $DO_CHECK_DESTINATION_EXIST -eq 1 ]] && [ ! -d ${DST} ] && {
+    echo "destination is required but is not a directory!"
+    validationExit
+  } || true
+}
+
 # REGISTER TRAPS
 trap "clean_up SIGHUP" SIGHUP
 trap "clean_up SIGINT" SIGINT
 trap "clean_up SIGTERM" SIGTERM
 
-## PROGRAM EXECUTION START HERE
+#                          ## PROGRAM EXECUTION START HERE
 
+### VALIDATION
 validate_execution_params
+validate_destination_must_exist
 
+### MAIN LOOP
 COUNTER=0;
 
 # loop
 while [ $COUNTER -lt $MAX_ITERATIONS ] || [ $MAX_ITERATIONS -eq "-1" ]; do
 
   [ $DO_PAUSE_AFTER -eq "1" ]  || sleep $PAUSE ;
-
 
   do_backup ;
   let COUNTER=COUNTER+1
